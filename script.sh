@@ -8,3 +8,4 @@ then
 echo El test fallo
 exit 1
 fi
+grep "false" > reporteResumido.txt
