@@ -2,14 +2,14 @@
 csvFile=$1
 projectName=$2
 reportFile=$3
-fecha=$4
+date + '%d/%m/%Y'
+varDate=$(date)
 docker run --rm -v $WORKSPACE:/workspace swethapn14/repo_perf:JmeterLatest -Jjmeterengine.stopfail.system.exit=true -Jjmeter.save.saveservice.output_format=xml -Jcsvfile=/workspace/$csvFile -n -t /workspace/$projectName -l /workspace/$reportFile
-if grep "false" $reportFile > resultadoemail.txt
-##&& grep $JOB_NAME > resultadoemail.txt && grep $DATE > resultadoemail.txt
+if grep "false" $reportFile > resultadoemail.txt && echo $JOB_NAME >> resultadoemail.txt && echo $varDate > resultadoemail.txt
 then 
 echo El test fallo
 exit 1
-else grep "true" $WORKSPACE/$reportFile > resultadoemail.txt && echo "\n"$JOB_NAME >> resultadoemail.txt
+else grep "true" $WORKSPACE/$reportFile > resultadoemail.txt && echo $JOB_NAME >> resultadoemail.txt && echo $VarDate > resultadoemail.txt 
 echo El test finalizo correctamente
 exit 0
 fi
