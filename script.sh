@@ -10,7 +10,7 @@ if grep "false" $reportFile > resultadoemail.txt
 then 
 echo El test fallo
 exit 1
-else grep "true" $WORKSPACE/$reportFile > resultadoemail.txt && echo $JOB_NAME > resultadoemail.txt
+else grep "true" $WORKSPACE/$reportFile > resultadoemail.txt && cat $JOB_NAME > resultadoemail.txt
 echo El test finalizo correctamente
 exit 0
 fi
